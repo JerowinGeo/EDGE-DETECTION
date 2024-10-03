@@ -25,34 +25,79 @@ Using Laplacian operator from cv2,detect the edges of the image and Using Canny 
 ## Code:
 ```
 import cv2
-# Read the image
-image = cv2.imread('username.jpg')
-gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+import matplotlib.pyplot as plt
 
-# Apply Gaussian blur
-img_blurred = cv2.GaussianBlur(gray_image, (3, 3), 0)
+# Read the image using imread
+img = cv2.imread('sunset.jpg')  # Replace 'image_path.jpg' with the actual path to your image
 
-# Sobel edge detection
-sobelx = cv2.Sobel(img_blurred, cv2.CV_64F, 1, 0, ksize=5)
-sobely = cv2.Sobel(img_blurred, cv2.CV_64F, 0, 1, ksize=5)
-sobelxy = cv2.Sobel(img_blurred, cv2.CV_64F, 1, 1, ksize=5)
+# Convert the color to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+gray = cv2.GaussianBlur(gray, (3, 3), 0)
 
-# Laplacian edge detection
-laplacian = cv2.Laplacian(img_blurred, cv2.CV_64F)
+# Sobel X axis
+sobelx = cv2.Sobel(gray, cv2.CV_64F, 1, 0, ksize=5)
+plt.figure(figsize=(8, 8))
+plt.subplot(1, 2, 1)
+plt.imshow(gray, cmap='gray')
+plt.title("Original Image")
+plt.axis("off")
+plt.subplot(1, 2, 2)
+plt.imshow(sobelx, cmap='gray')
+plt.title("Sobel X axis")
+plt.axis("off")
+plt.show()
 
-# Canny edge detection
-canny_edges = cv2.Canny(img_blurred, 120, 150)
+# Sobel Y axis
+sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=5)
+plt.figure(figsize=(8, 8))
+plt.subplot(1, 2, 1)
+plt.imshow(gray, cmap='gray')
+plt.title("Original Image")
+plt.axis("off")
+plt.subplot(1, 2, 2)
+plt.imshow(sobely, cmap='gray')
+plt.title("Sobel Y axis")
+plt.axis("off")
+plt.show()
 
-# Display images
-cv2.imshow('Original', gray_image)
-cv2.imshow('Sobel X', sobelx)
-cv2.imshow('Sobel Y', sobely)
-cv2.imshow('Sobel XY', sobelxy)
-cv2.imshow('Laplacian', laplacian)
-cv2.imshow('Canny Edges', canny_edges)
+# Sobel XY axis
+sobelxy = cv2.Sobel(gray, cv2.CV_64F, 1, 1, ksize=5)
+plt.figure(figsize=(8, 8))
+plt.subplot(1, 2, 1)
+plt.imshow(gray, cmap='gray')
+plt.title("Original Image")
+plt.axis("off")
+plt.subplot(1, 2, 2)
+plt.imshow(sobelxy, cmap='gray')
+plt.title("Sobel XY axis")
+plt.axis("off")
+plt.show()
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# Laplacian Edge Detector
+lap = cv2.Laplacian(gray, cv2.CV_64F)
+plt.figure(figsize=(8, 8))
+plt.subplot(1, 2, 1)
+plt.imshow(gray, cmap='gray')
+plt.title("Original Image")
+plt.axis("off")
+plt.subplot(1, 2, 2)
+plt.imshow(lap, cmap='gray')
+plt.title("Laplacian Edge Detector")
+plt.axis("off")
+plt.show()
+
+# Canny Edge Detector
+canny = cv2.Canny(gray, 120, 150)
+plt.figure(figsize=(8, 8))
+plt.subplot(1, 2, 1)
+plt.imshow(gray, cmap='gray')
+plt.title("Original Image")
+plt.axis("off")
+plt.subplot(1, 2, 2)
+plt.imshow(canny, cmap='gray')
+plt.title("Canny Edge Detector")
+plt.axis("off")
+plt.show()
 ```
 
 ## Output:
